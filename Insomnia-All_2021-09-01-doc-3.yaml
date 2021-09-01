@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2021-09-01T19:01:36.792Z
+__export_date: 2021-09-01T19:36:16.608Z
 __export_source: insomnia.desktop.app:v2021.5.2
 resources:
   - _id: req_dc3a683105a245d4be476f6dfcb45e74
@@ -101,6 +101,37 @@ resources:
         id: pair_0256d93f4f634e9da8242d3494108701
     authentication: {}
     metaSortKey: -1630514740859
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_32f8c031d7004c0ea2c4a9bbcb334ed5
+    parentId: fld_4dca412055b8405a9d85c49df4588ba3
+    modified: 1630524701976
+    created: 1630524669309
+    url: "{{ base_url_ph }}/person-hub/v1/persons/puid::{% response 'body',
+      'req_f847f6fce4b4480fbf8a859f67b84f57', 'b64::JC5wdWlk::46b', 'always', 60
+      %}"
+    name: get person - with bio demo data only (2)
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - id: pair_5160022cdbe0423695ac2a6335a15e93
+        name: x-client-id
+        value: "{{ _['x-client-id'] }}"
+        description: ""
+      - id: pair_773cef479a394abe81ec32f12b4838b5
+        name: x-client-secret
+        value: "{{ _['x-client-secret'] }}"
+        description: ""
+    authentication: {}
+    metaSortKey: -1630514740802.75
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -515,6 +546,18 @@ resources:
 
 
 
+    _type: unit_test
+  - _id: ut_59e353dedb9942af848799dd6d95a9c1
+    parentId: uts_caa6ed61764e431da865fb97fc2bfd4a
+    modified: 1630524750523
+    created: 1630524722608
+    requestId: null
+    name: Returns 200
+    code: >-
+      const response1 = await
+      insomnia.send("req_32f8c031d7004c0ea2c4a9bbcb334ed5");
+
+      expect(response1.status).to.equal(200);
     _type: unit_test
   - _id: ut_bc2ef6b0c17f4228849de02861f72fc6
     parentId: uts_bd2c51f66f7040819a2076188d1a716b
