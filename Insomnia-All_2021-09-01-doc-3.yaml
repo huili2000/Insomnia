@@ -1,14 +1,16 @@
 _type: export
 __export_format: 4
-__export_date: 2021-09-01T17:42:53.982Z
+__export_date: 2021-09-01T18:31:41.782Z
 __export_source: insomnia.desktop.app:v2021.5.2
 resources:
   - _id: req_dc3a683105a245d4be476f6dfcb45e74
-    parentId: fld_191aabfbcbe54dc082d5180cfc6ff1d5
-    modified: 1630516598685
+    parentId: fld_4dca412055b8405a9d85c49df4588ba3
+    modified: 1630519478230
     created: 1630514740809
-    url: "{{ base_url_ph }}/person-hub/v1/persons?page=1&pageSize=10"
-    name: get persons
+    url: "{{ base_url_ph }}/person-hub/v1/persons/puid::{% response 'body',
+      'req_f847f6fce4b4480fbf8a859f67b84f57', 'b64::JC5wdWlk::46b', 'always', 60
+      %}"
+    name: get person - with bio demo data only
     description: ""
     method: GET
     body: {}
@@ -32,6 +34,16 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
+  - _id: fld_4dca412055b8405a9d85c49df4588ba3
+    parentId: fld_191aabfbcbe54dc082d5180cfc6ff1d5
+    modified: 1630520517483
+    created: 1630519464461
+    name: create new person with bio data only
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1630519529047
+    _type: request_group
   - _id: fld_191aabfbcbe54dc082d5180cfc6ff1d5
     parentId: wrk_6656e2ba8dd44058bcf4db5f2d830d95
     modified: 1630514521817
@@ -54,11 +66,11 @@ resources:
     scope: design
     _type: workspace
   - _id: req_f847f6fce4b4480fbf8a859f67b84f57
-    parentId: fld_191aabfbcbe54dc082d5180cfc6ff1d5
-    modified: 1630517994654
+    parentId: fld_4dca412055b8405a9d85c49df4588ba3
+    modified: 1630519479715
     created: 1630517919944
     url: "{{ base_url_ph }}/person-hub/v1/persons"
-    name: add a person
+    name: add a person - with bio demo data only
     description: ""
     method: POST
     body:
@@ -69,9 +81,9 @@ resources:
           "birthDate" : "2015-07-20",
           "personNames" : [ {
             "nameType" : "Legal",
-            "givenName" : "$now()",
+            "givenName" : "{{ _.testCaseStartTime }}",
             
-            "familyName" : "$now()"
+            "familyName" : "{{ _.testCaseStartTime }}"
           } ]
         }
     parameters: []
@@ -88,7 +100,267 @@ resources:
         value: application/json
         id: pair_0256d93f4f634e9da8242d3494108701
     authentication: {}
-    metaSortKey: -1630514740759
+    metaSortKey: -1630514740859
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_c091a35feee543ae8229f6d69a1ec538
+    parentId: fld_b8f28b0d247a4b2991cff5beb9907311
+    modified: 1630519643713
+    created: 1630519565023
+    url: "{{ base_url_ph }}/person-hub/v1/persons/puid::{% response 'body',
+      'req_f847f6fce4b4480fbf8a859f67b84f57', 'b64::JC5wdWlk::46b', 'always', 60
+      %}"
+    name: get person - with existing employee id
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - id: pair_5160022cdbe0423695ac2a6335a15e93
+        name: x-client-id
+        value: "{{ _['x-client-id'] }}"
+        description: ""
+      - id: pair_773cef479a394abe81ec32f12b4838b5
+        name: x-client-secret
+        value: "{{ _['x-client-secret'] }}"
+        description: ""
+    authentication: {}
+    metaSortKey: -1630514740796.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_b8f28b0d247a4b2991cff5beb9907311
+    parentId: fld_191aabfbcbe54dc082d5180cfc6ff1d5
+    modified: 1630519528997
+    created: 1630519528997
+    name: create person with existing Employee Id
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1630519528997
+    _type: request_group
+  - _id: req_e06f96d067eb497498fa914b107ea9a3
+    parentId: fld_b8f28b0d247a4b2991cff5beb9907311
+    modified: 1630519844434
+    created: 1630519576191
+    url: "{{ base_url_ph }}/person-hub/v1/persons"
+    name: add a person - with existing employee id
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+         
+          "birthDate" : "2015-07-20",
+          "personNames" : [ {
+            "nameType" : "Legal",
+            "givenName" : "{{ _.testCaseStartTime }}",
+            "familyName" : "{{ _.testCaseStartTime }}"
+          } ]
+        ,
+          "identifiers" : [
+        	{
+        		"identifierType" : "SIN",
+        		"identifier" : "349562272"
+        	}
+          ]
+        }
+    parameters: []
+    headers:
+      - id: pair_ddb185007e7e444a957b584885ec5360
+        name: x-client-id
+        value: "{{ _['x-client-id'] }}"
+        description: ""
+      - id: pair_a1fc2a9da57c4233b087bb1fe143fe25
+        name: x-client-secret
+        value: "{{ _['x-client-secret'] }}"
+        description: ""
+      - name: Content-Type
+        value: application/json
+        id: pair_0256d93f4f634e9da8242d3494108701
+    authentication: {}
+    metaSortKey: -1630514740809
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_c97bbb686e334e0e8bcd6ef765a9516b
+    parentId: fld_b8f28b0d247a4b2991cff5beb9907311
+    modified: 1630520115349
+    created: 1630519636623
+    url: "{{ base_url_ph }}/person-hub/v1/retrieve-person-identifiers"
+    name: generate employee id with createIfMissing false
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: >-
+        {
+        	"identifier" : "{% response 'body', 'req_e06f96d067eb497498fa914b107ea9a3', 'b64::JC5wdWlk::46b', 'always', 60 %}",
+        	"identifierType" : "PUID",
+        	"requestedIdentifiers" : [
+        		{
+        			"identifierType" : "Employee_ID",
+        			"createIfMissing" : false
+        		}
+        	]
+        }
+    parameters: []
+    headers:
+      - id: pair_ddb185007e7e444a957b584885ec5360
+        name: x-client-id
+        value: "{{ _['x-client-id'] }}"
+        description: ""
+      - id: pair_a1fc2a9da57c4233b087bb1fe143fe25
+        name: x-client-secret
+        value: "{{ _['x-client-secret'] }}"
+        description: ""
+      - name: Content-Type
+        value: application/json
+        id: pair_0256d93f4f634e9da8242d3494108701
+    authentication: {}
+    metaSortKey: -1630514740784
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_4c8cad86aa0f45c293cc1f692823bca7
+    parentId: fld_b8f28b0d247a4b2991cff5beb9907311
+    modified: 1630520190008
+    created: 1630519652534
+    url: "{{ base_url_ph }}/person-hub/v1//retrieve-person-identifiers"
+    name: generate employee id with createIfMissing true
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: >-
+        {
+        	"identifier" : "{% response 'body', 'req_e06f96d067eb497498fa914b107ea9a3', 'b64::JC5wdWlk::46b', 'always', 60 %}",
+        	"identifierType" : "PUID",
+        	"requestedIdentifiers" : [
+        		{
+        			"identifierType" : "Employee_ID",
+        			"createIfMissing" : true
+        		}
+        	]
+        }
+    parameters: []
+    headers:
+      - id: pair_ddb185007e7e444a957b584885ec5360
+        name: x-client-id
+        value: "{{ _['x-client-id'] }}"
+        description: ""
+      - id: pair_a1fc2a9da57c4233b087bb1fe143fe25
+        name: x-client-secret
+        value: "{{ _['x-client-secret'] }}"
+        description: ""
+      - name: Content-Type
+        value: application/json
+        id: pair_0256d93f4f634e9da8242d3494108701
+    authentication: {}
+    metaSortKey: -1630514740734
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_999e42e78e484c539bd3d75b34d728f3
+    parentId: fld_b8f28b0d247a4b2991cff5beb9907311
+    modified: 1630520336430
+    created: 1630519677455
+    url: "{{ base_url_ph }}/person-hub/v1/persons/employee_id::{% response 'body',
+      'req_4c8cad86aa0f45c293cc1f692823bca7', 'b64::JFswXS5pZGVudGlmaWVy::46b',
+      'always', 60 %}"
+    name: get person - after employee_id
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - id: pair_5160022cdbe0423695ac2a6335a15e93
+        name: x-client-id
+        value: "{{ _['x-client-id'] }}"
+        description: ""
+      - id: pair_773cef479a394abe81ec32f12b4838b5
+        name: x-client-secret
+        value: "{{ _['x-client-secret'] }}"
+        description: ""
+    authentication: {}
+    metaSortKey: -1630514740709
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_9f8eca0694f74a618a300ce81ee98755
+    parentId: fld_b8f28b0d247a4b2991cff5beb9907311
+    modified: 1630520493221
+    created: 1630519719951
+    url: "{{ base_url_ph }}/person-hub/v1/persons"
+    name: create person using same Employee ID
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: >-
+        {
+         
+          "birthDate" : "2015-07-20",
+          "personNames" : [ {
+            "nameType" : "Legal",
+            "givenName" : "{{ _.testCaseStartTime }}",
+            "familyName" : "{{ _.testCaseStartTime }}"
+          } ]
+        ,
+          "identifiers" : [
+        	{
+        		"identifierType" : "Employee_ID",
+        		"identifier" : "{% response 'body', 'req_4c8cad86aa0f45c293cc1f692823bca7', 'b64::JFswXS5pZGVudGlmaWVy::46b', 'always', 60 %}"
+        	}
+          ]
+        }
+    parameters: []
+    headers:
+      - id: pair_ddb185007e7e444a957b584885ec5360
+        name: x-client-id
+        value: "{{ _['x-client-id'] }}"
+        description: ""
+      - id: pair_a1fc2a9da57c4233b087bb1fe143fe25
+        name: x-client-secret
+        value: "{{ _['x-client-secret'] }}"
+        description: ""
+      - name: Content-Type
+        value: application/json
+        id: pair_0256d93f4f634e9da8242d3494108701
+    authentication: {}
+    metaSortKey: -1630514740684
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -186,11 +458,67 @@ resources:
     _type: environment
   - _id: ut_cd0eadf321024bdd931aef5386c4637d
     parentId: uts_caa6ed61764e431da865fb97fc2bfd4a
-    modified: 1630518076099
+    modified: 1630518949935
     created: 1630518070426
-    requestId: req_dc3a683105a245d4be476f6dfcb45e74
-    name: Get Persons
-    code: |-
-      const response1 = await insomnia.send();
-      expect(response1.status).to.equal(200);
+    requestId: null
+    name: Create new person with bio demo data only
+    code: >+
+      const response1 = await
+      insomnia.send("req_f847f6fce4b4480fbf8a859f67b84f57");
+
+      expect(response1.status).to.equal(201);
+
+
+      const response2 = await insomnia.send("req_dc3a683105a245d4be476f6dfcb45e74");
+
+      expect(response2.status).to.equal(200);
+
+    _type: unit_test
+  - _id: ut_e7092d6e80b84d7189da761e7eb44c70
+    parentId: uts_caa6ed61764e431da865fb97fc2bfd4a
+    modified: 1630520936604
+    created: 1630520548454
+    requestId: null
+    name: Create person using same Employee ID
+    code: >+
+      const response1 = await
+      insomnia.send("req_e06f96d067eb497498fa914b107ea9a3");
+
+      expect(response1.status).to.equal(201);
+
+
+      const response2 = await insomnia.send("req_c091a35feee543ae8229f6d69a1ec538");
+
+      expect(response2.status).to.equal(200);
+
+
+      const response3 = await insomnia.send("req_c97bbb686e334e0e8bcd6ef765a9516b");
+
+      expect(response3.status).to.equal(200);
+
+
+      const response4 = await insomnia.send("req_4c8cad86aa0f45c293cc1f692823bca7");
+
+      expect(response4.status).to.equal(200);
+
+
+      const response5 = await insomnia.send("req_999e42e78e484c539bd3d75b34d728f3");
+
+      expect(response5.status).to.equal(200);
+
+
+
+
+    _type: unit_test
+  - _id: ut_74dd5478f3f14b04af9fb731f3ec3f31
+    parentId: uts_caa6ed61764e431da865fb97fc2bfd4a
+    modified: 1630521033319
+    created: 1630520996378
+    requestId: null
+    name: Create person with existing Employee ID (2)
+    code: >-
+      const response6 = await
+      insomnia.send("req_9f8eca0694f74a618a300ce81ee98755");
+
+      expect(response6.status).to.equal(409);
     _type: unit_test
