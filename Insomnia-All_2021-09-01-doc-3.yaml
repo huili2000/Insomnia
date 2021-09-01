@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2021-09-01T17:26:23.766Z
+__export_date: 2021-09-01T17:42:53.982Z
 __export_source: insomnia.desktop.app:v2021.5.2
 resources:
   - _id: req_dc3a683105a245d4be476f6dfcb45e74
@@ -53,6 +53,50 @@ resources:
       you can use the api key `special-key` to test the authorization filters."
     scope: design
     _type: workspace
+  - _id: req_f847f6fce4b4480fbf8a859f67b84f57
+    parentId: fld_191aabfbcbe54dc082d5180cfc6ff1d5
+    modified: 1630517994654
+    created: 1630517919944
+    url: "{{ base_url_ph }}/person-hub/v1/persons"
+    name: add a person
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+         
+          "birthDate" : "2015-07-20",
+          "personNames" : [ {
+            "nameType" : "Legal",
+            "givenName" : "$now()",
+            
+            "familyName" : "$now()"
+          } ]
+        }
+    parameters: []
+    headers:
+      - id: pair_ddb185007e7e444a957b584885ec5360
+        name: x-client-id
+        value: "{{ _['x-client-id'] }}"
+        description: ""
+      - id: pair_a1fc2a9da57c4233b087bb1fe143fe25
+        name: x-client-secret
+        value: "{{ _['x-client-secret'] }}"
+        description: ""
+      - name: Content-Type
+        value: application/json
+        id: pair_0256d93f4f634e9da8242d3494108701
+    authentication: {}
+    metaSortKey: -1630514740759
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
   - _id: env_d781871fb43f3cfbb4a2e069688b26c38a77f050
     parentId: wrk_6656e2ba8dd44058bcf4db5f2d830d95
     modified: 1630516459520
@@ -84,6 +128,12 @@ resources:
     contents: ""
     contentType: yaml
     _type: api_spec
+  - _id: uts_caa6ed61764e431da865fb97fc2bfd4a
+    parentId: wrk_6656e2ba8dd44058bcf4db5f2d830d95
+    modified: 1630518031523
+    created: 1630518031523
+    name: General-Testsuite
+    _type: unit_test_suite
   - _id: env_8ef1355ea31d411db8e0a570537eb274
     parentId: env_d781871fb43f3cfbb4a2e069688b26c38a77f050
     modified: 1630514684769
@@ -134,3 +184,13 @@ resources:
     isPrivate: false
     metaSortKey: 1630514544516
     _type: environment
+  - _id: ut_cd0eadf321024bdd931aef5386c4637d
+    parentId: uts_caa6ed61764e431da865fb97fc2bfd4a
+    modified: 1630518076099
+    created: 1630518070426
+    requestId: req_dc3a683105a245d4be476f6dfcb45e74
+    name: Get Persons
+    code: |-
+      const response1 = await insomnia.send();
+      expect(response1.status).to.equal(200);
+    _type: unit_test
