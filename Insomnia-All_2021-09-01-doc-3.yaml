@@ -1,0 +1,136 @@
+_type: export
+__export_format: 4
+__export_date: 2021-09-01T17:26:23.766Z
+__export_source: insomnia.desktop.app:v2021.5.2
+resources:
+  - _id: req_dc3a683105a245d4be476f6dfcb45e74
+    parentId: fld_191aabfbcbe54dc082d5180cfc6ff1d5
+    modified: 1630516598685
+    created: 1630514740809
+    url: "{{ base_url_ph }}/person-hub/v1/persons?page=1&pageSize=10"
+    name: get persons
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - id: pair_5160022cdbe0423695ac2a6335a15e93
+        name: x-client-id
+        value: "{{ _['x-client-id'] }}"
+        description: ""
+      - id: pair_773cef479a394abe81ec32f12b4838b5
+        name: x-client-secret
+        value: "{{ _['x-client-secret'] }}"
+        description: ""
+    authentication: {}
+    metaSortKey: -1630514740809
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_191aabfbcbe54dc082d5180cfc6ff1d5
+    parentId: wrk_6656e2ba8dd44058bcf4db5f2d830d95
+    modified: 1630514521817
+    created: 1630514521817
+    name: person-hub
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1630514521817
+    _type: request_group
+  - _id: wrk_6656e2ba8dd44058bcf4db5f2d830d95
+    parentId: null
+    modified: 1630514418930
+    created: 1630514418930
+    name: Swagger Petstore 1.0.2
+    description: "This is a sample server Petstore server.  You can find out more
+      about Swagger at [http://swagger.io](http://swagger.io) or on
+      [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample,
+      you can use the api key `special-key` to test the authorization filters."
+    scope: design
+    _type: workspace
+  - _id: env_d781871fb43f3cfbb4a2e069688b26c38a77f050
+    parentId: wrk_6656e2ba8dd44058bcf4db5f2d830d95
+    modified: 1630516459520
+    created: 1630514418884
+    name: Base environment
+    data:
+      base_url: "{{ scheme }}://{{ host }}{{ base_path }}"
+      base_url_ph: "{{ scheme }}://{{ host_ph }}"
+    dataPropertyOrder:
+      "&":
+        - base_url
+        - base_url_ph
+    color: null
+    isPrivate: false
+    metaSortKey: 1630514418884
+    _type: environment
+  - _id: jar_d781871fb43f3cfbb4a2e069688b26c38a77f050
+    parentId: wrk_6656e2ba8dd44058bcf4db5f2d830d95
+    modified: 1630514428784
+    created: 1630514428784
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
+  - _id: spc_b472f37dc13541d4b82846e2b1739c4b
+    parentId: wrk_6656e2ba8dd44058bcf4db5f2d830d95
+    modified: 1630516935790
+    created: 1630514418931
+    fileName: IEC - test - import - export
+    contents: ""
+    contentType: yaml
+    _type: api_spec
+  - _id: env_8ef1355ea31d411db8e0a570537eb274
+    parentId: env_d781871fb43f3cfbb4a2e069688b26c38a77f050
+    modified: 1630514684769
+    created: 1630514544516
+    name: Dev
+    data:
+      scheme: https
+      base_path: hcm
+      host: dev.api.ubc.ca
+      host_ph: dev.internal.api.ubc.ca
+      version: v7
+      version_ph: v1
+      academicAppointmentId: FAKE
+      testCaseStartTime: "{% now 'unix', '' %}"
+      referenceType_leaveType: leaveType
+      referenceType_earningCode: earningCode
+      referenceType_functionalHierarchyLevel: functionalHierarchyLevel
+      reference_id_cost_allocation: P000013028
+      pmMaxElapsedTim: "600"
+      startTime: "1629825632223"
+      global_file: H:\insomnia\global\global.json
+      global_x-client_id: H:\insomnia\global\x-client-id.txt
+      global_x-client_secret: H:\insomnia\global\x-client-secret.txt
+      x-client-id: "{% file _['global_x-client_id'] %}"
+      x-client-secret: "{% file _['global_x-client_secret'] %}"
+    dataPropertyOrder:
+      "&":
+        - scheme
+        - base_path
+        - host
+        - host_ph
+        - version
+        - version_ph
+        - academicAppointmentId
+        - testCaseStartTime
+        - referenceType_leaveType
+        - referenceType_earningCode
+        - referenceType_functionalHierarchyLevel
+        - reference_id_cost_allocation
+        - pmMaxElapsedTim
+        - startTime
+        - global_file
+        - global_x-client_id
+        - global_x-client_secret
+        - x-client-id
+        - x-client-secret
+    color: null
+    isPrivate: false
+    metaSortKey: 1630514544516
+    _type: environment
